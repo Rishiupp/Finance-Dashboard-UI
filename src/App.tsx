@@ -13,18 +13,17 @@ import InsightsPanel from './components/InsightsPanel';
 function GridBackground() {
   return (
     <div className="fixed inset-0 -z-10">
-      <div className="absolute inset-0 bg-[#f8f9fc] dark:bg-[#0a0a12]" />
+      <div className="absolute inset-0 bg-[#f8f9fc] dark:bg-[#0a0a0a]" />
       <div
         className={cn(
           "absolute inset-0 opacity-40",
           "[background-size:48px_48px]",
           "[background-image:linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)]",
-          "dark:[background-image:linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]",
+          "dark:[background-image:linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)]",
         )}
       />
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-400/10 dark:bg-violet-600/8 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/10 dark:bg-indigo-600/8 rounded-full blur-[120px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-300/8 dark:bg-blue-600/5 rounded-full blur-[150px]" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-neutral-300/10 dark:bg-white/[0.02] rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-neutral-300/10 dark:bg-white/[0.02] rounded-full blur-[120px]" />
     </div>
   );
 }
@@ -52,16 +51,16 @@ function DashboardContent() {
             >
               {/* Hero */}
               <div className="text-center pt-4 pb-2">
-                <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-2">Dashboard</p>
+                <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-500 tracking-widest uppercase mb-2">Dashboard</p>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white">
                   Financial Overview
                 </h2>
-                <p className="text-neutral-500 dark:text-neutral-400 mt-2 max-w-lg mx-auto text-sm leading-relaxed">
+                <p className="text-neutral-500 dark:text-neutral-500 mt-2 max-w-lg mx-auto text-sm leading-relaxed">
                   Track your income, expenses, and spending patterns at a glance
                 </p>
               </div>
 
-              {/* Charts Grid — FIRST */}
+              {/* Charts Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
                   <CandlestickChart />
@@ -71,22 +70,22 @@ function DashboardContent() {
                 </div>
               </div>
 
-              {/* Summary Cards — SECOND */}
+              {/* Summary Cards */}
               <SummaryCards />
 
-              {/* Recent Transactions — THIRD */}
+              {/* Recent Transactions */}
               <div className="rounded-2xl border border-neutral-200/60 dark:border-white/[0.06] bg-white/70 dark:bg-white/[0.02] backdrop-blur-xl p-6 shadow-sm dark:shadow-none">
                 <div className="flex items-center justify-between mb-5">
                   <div>
                     <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Recent Transactions</h3>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Latest financial activity</p>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-500 mt-0.5">Latest financial activity</p>
                   </div>
                   <button
                     onClick={() => state.role === 'admin' && setShowAddModal(true)}
                     className={cn(
                       'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all',
                       state.role === 'admin'
-                        ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5'
+                        ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:opacity-90 hover:-translate-y-0.5'
                         : 'bg-neutral-100 dark:bg-white/5 text-neutral-400 cursor-not-allowed border border-neutral-200 dark:border-white/10'
                     )}
                     disabled={state.role !== 'admin'}
@@ -112,14 +111,14 @@ function DashboardContent() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-1">Transactions</p>
+                  <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-500 tracking-widest uppercase mb-1">Transactions</p>
                   <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Manage Activity</h2>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Search, filter, and explore your financial records</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-500 mt-1">Search, filter, and explore your financial records</p>
                 </div>
                 {state.role === 'admin' && (
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-semibold hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all"
+                    className="px-5 py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all"
                   >
                     + Add Transaction
                   </button>
@@ -142,9 +141,9 @@ function DashboardContent() {
               className="space-y-6"
             >
               <div>
-                <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-1">Insights</p>
+                <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-500 tracking-widest uppercase mb-1">Insights</p>
                 <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Financial Intelligence</h2>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Understand your spending patterns and financial health</p>
+                <p className="text-sm text-neutral-500 dark:text-neutral-500 mt-1">Understand your spending patterns and financial health</p>
               </div>
               <InsightsPanel />
             </motion.div>

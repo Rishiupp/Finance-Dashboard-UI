@@ -29,7 +29,7 @@ export default function AddTransactionModal({ open, onClose }: { open: boolean; 
 
   if (!open) return null;
 
-  const inputCls = "w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-violet-400 dark:focus:border-violet-500/40 focus:ring-2 focus:ring-violet-500/10";
+  const inputCls = "w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 focus:ring-2 focus:ring-neutral-500/10";
 
   return (
     <div className="fixed inset-0 z-[100] grid place-items-center">
@@ -100,7 +100,7 @@ export default function AddTransactionModal({ open, onClose }: { open: boolean; 
           </div>
 
           <button type="submit" id="submit-transaction"
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-sm hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all">
+            className="w-full py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm hover:opacity-90 hover:-translate-y-0.5 transition-all">
             Add Transaction
           </button>
         </form>

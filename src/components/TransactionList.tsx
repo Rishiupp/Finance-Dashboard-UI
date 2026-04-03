@@ -57,17 +57,17 @@ export default function TransactionList() {
           </svg>
           <input id="search-transactions" type="text" placeholder="Search transactions..."
             value={state.searchQuery} onChange={e => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-violet-400 dark:focus:border-violet-500/40 focus:ring-2 focus:ring-violet-500/10 transition-all" />
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 focus:ring-2 focus:ring-neutral-500/10 transition-all" />
         </div>
         <select id="filter-category" value={state.filterCategory}
           onChange={e => dispatch({ type: 'SET_FILTER_CATEGORY', payload: e.target.value })}
-          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-violet-400 dark:focus:border-violet-500/40 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
+          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
           <option value="all">All Categories</option>
           {Object.keys(categoryColors).map(cat => (<option key={cat} value={cat}>{cat}</option>))}
         </select>
         <select id="filter-type" value={state.filterType}
           onChange={e => dispatch({ type: 'SET_FILTER_TYPE', payload: e.target.value })}
-          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-violet-400 dark:focus:border-violet-500/40 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
+          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
           <option value="all">All Types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
@@ -77,7 +77,7 @@ export default function TransactionList() {
             onClick={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'date', sortOrder: state.sortBy === 'date' && state.sortOrder === 'desc' ? 'asc' : 'desc' } })}
             className={`px-3 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
               state.sortBy === 'date'
-                ? 'border-violet-400 dark:border-violet-500/40 bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300'
+                ? 'border-neutral-900 dark:border-white/30 bg-neutral-100 dark:bg-white/10 text-neutral-900 dark:text-white'
                 : 'border-neutral-200 dark:border-white/[0.08] text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
             }`}>
             Date {state.sortBy === 'date' ? (state.sortOrder === 'desc' ? '↓' : '↑') : ''}
@@ -86,7 +86,7 @@ export default function TransactionList() {
             onClick={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'amount', sortOrder: state.sortBy === 'amount' && state.sortOrder === 'desc' ? 'asc' : 'desc' } })}
             className={`px-3 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
               state.sortBy === 'amount'
-                ? 'border-violet-400 dark:border-violet-500/40 bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300'
+                ? 'border-neutral-900 dark:border-white/30 bg-neutral-100 dark:bg-white/10 text-neutral-900 dark:text-white'
                 : 'border-neutral-200 dark:border-white/[0.08] text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
             }`}>
             Amount {state.sortBy === 'amount' ? (state.sortOrder === 'desc' ? '↓' : '↑') : ''}

@@ -76,7 +76,7 @@ export default function InsightsPanel() {
     { title: 'Top Spending', value: insights.highestCategory?.[0] ?? 'N/A', subtitle: insights.highestCategory ? formatCurrency(insights.highestCategory[1]) : '', iconLabel: 'TS', accent: 'from-rose-500 to-red-500', border: 'hover:border-rose-300 dark:hover:border-rose-500/30' },
     { title: 'Avg Expense', value: formatCurrency(insights.avgExpense), subtitle: 'per transaction', iconLabel: 'AE', accent: 'from-amber-500 to-orange-500', border: 'hover:border-amber-300 dark:hover:border-amber-500/30' },
     { title: 'Most Frequent', value: insights.mostFrequentCategory?.[0] ?? 'N/A', subtitle: insights.mostFrequentCategory ? `${insights.mostFrequentCategory[1]} transactions` : '', iconLabel: 'MF', accent: 'from-blue-500 to-cyan-500', border: 'hover:border-blue-300 dark:hover:border-blue-500/30' },
-    { title: 'Avg Income', value: formatCurrency(insights.avgIncome), subtitle: 'per transaction', iconLabel: 'AI', accent: 'from-violet-500 to-purple-500', border: 'hover:border-violet-300 dark:hover:border-violet-500/30' },
+    { title: 'Avg Income', value: formatCurrency(insights.avgIncome), subtitle: 'per transaction', iconLabel: 'AI', accent: 'from-neutral-600 to-neutral-800', border: 'hover:border-neutral-400 dark:hover:border-neutral-500/30' },
     { title: 'Largest Expense', value: insights.largestExpense ? formatCurrency(insights.largestExpense.amount) : 'N/A', subtitle: insights.largestExpense?.description ?? '', iconLabel: 'LX', accent: 'from-pink-500 to-fuchsia-500', border: 'hover:border-pink-300 dark:hover:border-pink-500/30' },
   ];
 
