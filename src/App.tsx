@@ -1,121 +1,224 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
+import { AppProvider, useAppContext } from './context/AppContext';
+import Header from './components/Header';
+import SummaryCards from './components/SummaryCards';
+import CandlestickChart from './components/CandlestickChart';
+import SpendingBreakdown from './components/SpendingBreakdown';
+import TransactionList from './components/TransactionList';
+import AddTransactionModal from './components/AddTransactionModal';
+import InsightsPanel from './components/InsightsPanel';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function GridBackground() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <div className="fixed inset-0 -z-10">
+      <div className="absolute inset-0 bg-[#f8f9fc] dark:bg-[#0a0a12]" />
+      <div
+        className={cn(
+          "absolute inset-0 opacity-40",
+          "[background-size:48px_48px]",
+          "[background-image:linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)]",
+          "dark:[background-image:linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]",
+        )}
+      />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-400/10 dark:bg-violet-600/8 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/10 dark:bg-indigo-600/8 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-300/8 dark:bg-blue-600/5 rounded-full blur-[150px]" />
+    </div>
+  );
 }
 
-export default App
+function DashboardContent() {
+  const { state } = useAppContext();
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  return (
+    <div className="min-h-screen">
+      <GridBackground />
+      <Header />
+
+      <main className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
+        <AnimatePresence mode="wait">
+          {/* ═══════════ DASHBOARD TAB ═══════════ */}
+          {state.activeTab === 'dashboard' && (
+            <motion.div
+              key="dashboard"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-8"
+            >
+              {/* Hero */}
+              <div className="text-center pt-4 pb-2">
+                <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-2">Dashboard</p>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white">
+                  Financial Overview
+                </h2>
+                <p className="text-neutral-500 dark:text-neutral-400 mt-2 max-w-lg mx-auto text-sm leading-relaxed">
+                  Track your income, expenses, and spending patterns at a glance
+                </p>
+              </div>
+
+              {/* Charts Grid — FIRST */}
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div className="lg:col-span-3">
+                  <CandlestickChart />
+                </div>
+                <div className="lg:col-span-2">
+                  <SpendingBreakdown />
+                </div>
+              </div>
+
+              {/* Summary Cards — SECOND */}
+              <SummaryCards />
+
+              {/* Recent Transactions — THIRD */}
+              <div className="rounded-2xl border border-neutral-200/60 dark:border-white/[0.06] bg-white/70 dark:bg-white/[0.02] backdrop-blur-xl p-6 shadow-sm dark:shadow-none">
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Recent Transactions</h3>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">Latest financial activity</p>
+                  </div>
+                  <button
+                    onClick={() => state.role === 'admin' && setShowAddModal(true)}
+                    className={cn(
+                      'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all',
+                      state.role === 'admin'
+                        ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5'
+                        : 'bg-neutral-100 dark:bg-white/5 text-neutral-400 cursor-not-allowed border border-neutral-200 dark:border-white/10'
+                    )}
+                    disabled={state.role !== 'admin'}
+                    title={state.role !== 'admin' ? 'Switch to Admin role to add transactions' : ''}
+                  >
+                    {state.role === 'admin' ? '+ Add Transaction' : 'View Only'}
+                  </button>
+                </div>
+                <TransactionList />
+              </div>
+            </motion.div>
+          )}
+
+          {/* ═══════════ TRANSACTIONS TAB ═══════════ */}
+          {state.activeTab === 'transactions' && (
+            <motion.div
+              key="transactions"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-1">Transactions</p>
+                  <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Manage Activity</h2>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Search, filter, and explore your financial records</p>
+                </div>
+                {state.role === 'admin' && (
+                  <button
+                    onClick={() => setShowAddModal(true)}
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-semibold hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all"
+                  >
+                    + Add Transaction
+                  </button>
+                )}
+              </div>
+              <div className="rounded-2xl border border-neutral-200/60 dark:border-white/[0.06] bg-white/70 dark:bg-white/[0.02] backdrop-blur-xl p-6 shadow-sm dark:shadow-none">
+                <TransactionList />
+              </div>
+            </motion.div>
+          )}
+
+          {/* ═══════════ INSIGHTS TAB ═══════════ */}
+          {state.activeTab === 'insights' && (
+            <motion.div
+              key="insights"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <div>
+                <p className="text-sm font-semibold text-violet-600 dark:text-violet-400 tracking-widest uppercase mb-1">Insights</p>
+                <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Financial Intelligence</h2>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Understand your spending patterns and financial health</p>
+              </div>
+              <InsightsPanel />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
+
+      <footer className="border-t border-neutral-200/60 dark:border-white/[0.06] py-6 mt-16">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-neutral-400 dark:text-neutral-600">
+            2026 Zorvyn. Built for evaluation purposes.
+          </p>
+          <div className="flex items-center gap-4">
+            <ExportButton />
+            <span className="text-xs text-neutral-400 dark:text-neutral-600">
+              Role: <span className="font-semibold capitalize text-neutral-600 dark:text-neutral-400">{state.role}</span>
+            </span>
+          </div>
+        </div>
+      </footer>
+
+      <AddTransactionModal open={showAddModal} onClose={() => setShowAddModal(false)} />
+    </div>
+  );
+}
+
+function ExportButton() {
+  const { state } = useAppContext();
+
+  const handleExport = (format: 'csv' | 'json') => {
+    const data = state.transactions;
+    let content: string;
+    let filename: string;
+    let mimeType: string;
+
+    if (format === 'json') {
+      content = JSON.stringify(data, null, 2);
+      filename = 'transactions.json';
+      mimeType = 'application/json';
+    } else {
+      const headers = ['ID', 'Date', 'Description', 'Amount', 'Category', 'Type'];
+      const rows = data.map(t => [t.id, t.date, t.description, t.amount, t.category, t.type].join(','));
+      content = [headers.join(','), ...rows].join('\n');
+      filename = 'transactions.csv';
+      mimeType = 'text/csv';
+    }
+
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <button id="export-csv" onClick={() => handleExport('csv')}
+        className="text-xs px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-white/10 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 hover:border-neutral-300 dark:hover:border-white/20 transition-colors">
+        Export CSV
+      </button>
+      <button id="export-json" onClick={() => handleExport('json')}
+        className="text-xs px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-white/10 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 hover:border-neutral-300 dark:hover:border-white/20 transition-colors">
+        Export JSON
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <DashboardContent />
+    </AppProvider>
+  );
+}
