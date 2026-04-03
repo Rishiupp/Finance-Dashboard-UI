@@ -88,7 +88,7 @@ export default function SpendingBreakdown() {
         </ResponsiveContainer>
 
         {/* Legend with amounts and percentage */}
-        <div className="w-full grid grid-cols-3 gap-2 mt-3">
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3">
           {categoryData.map(cat => (
             <div key={cat.name} className="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-neutral-50 dark:bg-white/[0.03] border border-neutral-100 dark:border-white/[0.04]">
               <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color }} />

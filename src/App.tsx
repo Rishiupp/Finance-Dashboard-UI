@@ -75,7 +75,7 @@ function DashboardContent() {
 
               {/* Recent Transactions */}
               <div className="rounded-2xl border border-neutral-200/60 dark:border-white/[0.06] bg-white/70 dark:bg-white/[0.02] backdrop-blur-xl p-6 shadow-sm dark:shadow-none">
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                   <div>
                     <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Recent Transactions</h3>
                     <p className="text-sm text-neutral-500 dark:text-neutral-500 mt-0.5">Latest financial activity</p>
@@ -83,7 +83,7 @@ function DashboardContent() {
                   <button
                     onClick={() => state.role === 'admin' && setShowAddModal(true)}
                     className={cn(
-                      'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all',
+                      'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all w-full sm:w-auto',
                       state.role === 'admin'
                         ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:opacity-90 hover:-translate-y-0.5'
                         : 'bg-neutral-100 dark:bg-white/5 text-neutral-400 cursor-not-allowed border border-neutral-200 dark:border-white/10'
@@ -109,7 +109,7 @@ function DashboardContent() {
               transition={{ duration: 0.4 }}
               className="space-y-6"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-500 tracking-widest uppercase mb-1">Transactions</p>
                   <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white">Manage Activity</h2>
@@ -118,7 +118,7 @@ function DashboardContent() {
                 {state.role === 'admin' && (
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="px-5 py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all"
+                    className="px-5 py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto"
                   >
                     + Add Transaction
                   </button>

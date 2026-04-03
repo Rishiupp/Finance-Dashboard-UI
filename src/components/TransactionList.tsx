@@ -49,9 +49,8 @@ export default function TransactionList() {
 
   return (
     <>
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-5">
-        <div className="flex-1 relative">
+      <div className="space-y-3 mb-5">
+        <div className="relative">
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -59,20 +58,20 @@ export default function TransactionList() {
             value={state.searchQuery} onChange={e => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
             className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 focus:ring-2 focus:ring-neutral-500/10 transition-all" />
         </div>
-        <select id="filter-category" value={state.filterCategory}
-          onChange={e => dispatch({ type: 'SET_FILTER_CATEGORY', payload: e.target.value })}
-          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
-          <option value="all">All Categories</option>
-          {Object.keys(categoryColors).map(cat => (<option key={cat} value={cat}>{cat}</option>))}
-        </select>
-        <select id="filter-type" value={state.filterType}
-          onChange={e => dispatch({ type: 'SET_FILTER_TYPE', payload: e.target.value })}
-          className="px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
-          <option value="all">All Types</option>
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <select id="filter-category" value={state.filterCategory}
+            onChange={e => dispatch({ type: 'SET_FILTER_CATEGORY', payload: e.target.value })}
+            className="flex-1 min-w-[120px] px-3 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
+            <option value="all">All Categories</option>
+            {Object.keys(categoryColors).map(cat => (<option key={cat} value={cat}>{cat}</option>))}
+          </select>
+          <select id="filter-type" value={state.filterType}
+            onChange={e => dispatch({ type: 'SET_FILTER_TYPE', payload: e.target.value })}
+            className="flex-1 min-w-[100px] px-3 py-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.08] bg-neutral-50 dark:bg-white/[0.03] text-sm font-medium text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-400 dark:focus:border-white/20 [&>option]:bg-white dark:[&>option]:bg-[#141420]">
+            <option value="all">All Types</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
           <button id="sort-date"
             onClick={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'date', sortOrder: state.sortBy === 'date' && state.sortOrder === 'desc' ? 'asc' : 'desc' } })}
             className={`px-3 py-2.5 rounded-xl border text-sm font-semibold transition-all ${

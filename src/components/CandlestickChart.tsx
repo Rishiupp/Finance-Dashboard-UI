@@ -55,7 +55,7 @@ export default function CandlestickChart() {
 
   return (
     <div className="rounded-2xl border border-neutral-200/70 dark:border-white/[0.06] bg-white/80 dark:bg-white/[0.02] backdrop-blur-sm p-5 h-full shadow-sm dark:shadow-none">
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
         <div>
           <h3 className="text-base font-bold text-neutral-900 dark:text-white">Balance Trend</h3>
           <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Candlestick · 60 intervals</p>
@@ -71,7 +71,7 @@ export default function CandlestickChart() {
           </span>
         </div>
       </div>
-      <ResponsiveContainer width="100%" height={340}>
+      <ResponsiveContainer width="100%" height={280} className="sm:[height:340px]">
         <BarChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
           <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--chart-grid, #e5e7eb)" />
           <XAxis dataKey="time" tickFormatter={timestampToTime} tick={{ fontSize: 10, fill: '#9ca3af' }} axisLine={false} tickLine={false} interval={9} />
